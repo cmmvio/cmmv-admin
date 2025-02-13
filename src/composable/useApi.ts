@@ -33,7 +33,7 @@ export function useApi() {
         }
     }
 
-    const login = async (credentials: { username: string; password: string }) => {
+    const login = async (credentials: { username: string; password: string; token?: string }) => {
         const response = await fetch(`api/auth/login`, {
             method: 'POST',
             headers: {
@@ -47,7 +47,7 @@ export function useApi() {
         if (response.ok && data.result.token) {
             localStorage.setItem('token', data.result.token)
             token.value = data.result.token
-            return { success: true, user: data.user }
+            return data.result
         } else {
             throw new Error(data.result.message || 'Login failed')
         }
@@ -62,59 +62,7 @@ export function useApi() {
 
     const checkSession = async () => {}
 
-    const methods = {
-        async AddGroups(data) {
-            return await authRequest('groups', 'POST', data)
-        },
-        async UpdateGroups(id, data) {
-            return await authRequest(`groups/${id}`, 'PUT', data)
-        },
-        async DeleteGroups(id) {
-            return await authRequest(`groups/${id}`, 'DELETE')
-        },
-        async GetAllGroups() {
-            return await authRequest('groups', 'GET')
-        },
-
-        async AddRoles(data) {
-            return await authRequest('roles', 'POST', data)
-        },
-        async UpdateRoles(id, data) {
-            return await authRequest(`roles/${id}`, 'PUT', data)
-        },
-        async DeleteRoles(id) {
-            return await authRequest(`roles/${id}`, 'DELETE')
-        },
-        async GetAllRoles() {
-            return await authRequest('roles', 'GET')
-        },
-
-        async AddSessions(data) {
-            return await authRequest('sessions', 'POST', data)
-        },
-        async UpdateSessions(id, data) {
-            return await authRequest(`sessions/${id}`, 'PUT', data)
-        },
-        async DeleteSessions(id) {
-            return await authRequest(`sessions/${id}`, 'DELETE')
-        },
-        async GetAllSessions() {
-            return await authRequest('sessions', 'GET')
-        },
-
-        async AddUser(data) {
-            return await authRequest('user', 'POST', data)
-        },
-        async UpdateUser(id, data) {
-            return await authRequest(`user/${id}`, 'PUT', data)
-        },
-        async DeleteUser(id) {
-            return await authRequest(`user/${id}`, 'DELETE')
-        },
-        async GetAllUser() {
-            return await authRequest('user', 'GET')
-        },
-    }
+    const methods = {}
 
     return {
         user,

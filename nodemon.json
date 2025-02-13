@@ -1,0 +1,18 @@
+{
+    "watch": ["api"],
+    "ext": "ts,js,cjs",
+    "ignore": [
+        "api/**/*.spec.ts",
+        "api/services",
+        "api/models",
+        "api/controllers",
+        "api/protos",
+        "api/app.module.ts",
+        "api/gateways",
+        "api/entities"
+    ],
+    "env": {
+        "TS_NODE_PROJECT": "./api/tsconfig.json"
+    },
+    "exec": "node -r @swc-node/register ./api/index.ts"
+}
