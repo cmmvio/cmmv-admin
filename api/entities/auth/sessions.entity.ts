@@ -12,7 +12,7 @@ import {
 	CreateDateColumn, 
     UpdateDateColumn, 
     ManyToOne
-} from "typeorm";
+} from "@cmmv/repository";
 
 import { 
     ISessions 
@@ -40,6 +40,7 @@ export class SessionsEntity implements ISessions {
     })
     fingerprint: string;
 
+    @ManyToOne(() => UserEntity, (user) => user._id, { nullable: false })
     @Column({ 
         type: "string", 
         nullable: true 

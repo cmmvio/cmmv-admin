@@ -1,30 +1,26 @@
-/**                                                                               
+/**
     **********************************************
     This script was generated automatically by CMMV.
-    It is recommended not to modify this file manually, 
+    It is recommended not to modify this file manually,
     as it may be overwritten by the application.
     **********************************************
 **/
 
-import * as fastJson from "fast-json-stringify";
+import { fastJson } from "@cmmv/core";
 import * as crypto from "crypto";
-import { ObjectId } from "mongodb";
+import { ObjectId } from "@cmmv/repository";
 
-import { 
-    Expose, instanceToPlain, plainToInstance, Exclude, Transform 
-} from "class-transformer";
+import {
+    Expose, instanceToPlain, plainToInstance, Exclude, Transform
+} from "@cmmv/core";
 
-import { 
-    IsOptional, IsString, MinLength, MaxLength 
-} from "class-validator"; 
+import {
+    IsOptional, IsString, MinLength, MaxLength
+} from "@cmmv/core"; 
 
-import { 
-    Groups, GroupsFastSchemaStructure 
+import {
+    Groups, GroupsFastSchemaStructure
 } from "@models/auth/groups.model"; 
-
-import { 
-    Roles, RolesFastSchemaStructure 
-} from "@models/auth/roles.model"; 
 
 export interface IUser {
     _id?: ObjectId;
@@ -32,7 +28,7 @@ export interface IUser {
     password: string;
     provider?: string;
     groups?: object | string | string[] | ObjectId;
-    roles?: object | string | string[] | ObjectId;
+    roles?: string[];
     root: boolean;
     blocked: boolean;
     validated: boolean;
@@ -42,14 +38,11 @@ export interface IUser {
     verifySMSCode?: number;
     optSecret?: string;
     optSecretVerify: boolean;
+    profile?: string;
 }
 
 //Model
 export class User implements IUser {
-    @Expose()
-    @IsOptional()
-    _id?: ObjectId;
-
     @Expose({ toClassOnly: true })
     @IsOptional()
     id: string;
@@ -73,7 +66,7 @@ export class User implements IUser {
     groups?: Groups[] | string[] | ObjectId[] | null;
 
     @Expose()
-    roles?: Roles[] | string[] | ObjectId[] | null;
+    roles?: string[] = [];
 
     @Expose()
     root: boolean = false;
@@ -87,20 +80,25 @@ export class User implements IUser {
     @Expose()
     verifyEmail: boolean = false;
 
-    @Expose()
+    @Exclude({ toPlainOnly: true })
     verifyEmailCode?: number;
 
     @Expose()
     verifySMS: boolean = false;
 
-    @Expose()
+    @Exclude({ toPlainOnly: true })
     verifySMSCode?: number;
 
-    @Expose()
+    @Exclude({ toPlainOnly: true })
     optSecret?: string;
 
-    @Expose()
+    @Exclude({ toPlainOnly: true })
     optSecretVerify: boolean = false;
+
+    @Expose()
+    @Transform(value => typeof value === 'object' ? JSON.stringify(value) : '{}', { toClassOnly: true })
+    @Transform(value => (typeof value === 'string' ? JSON.parse(value) : {}), { toPlainOnly: true })
+    profile?: string = '{}';
 
     constructor(partial: Partial<User>) {
         Object.assign(this, partial);
@@ -118,7 +116,7 @@ export class User implements IUser {
         })
     }
 
-    public static fromEntity(entity: any) : User {
+    public static fromEntity(entity: any) : any {
         return plainToInstance(this, entity, {
             exposeUnsetFields: false,
             enableImplicitConversion: true,
@@ -136,73 +134,80 @@ export const UserFastSchemaStructure = {
     title: "User Schema",
     type: "object",
     properties: {
-        id: { 
+        id: {
             type: "string",
-            nullable: false 
+            nullable: false
         },
-        username: { 
+        username: {
             type: "string",
-            nullable: false 
+            nullable: false
         },
-        password: { 
+        password: {
             type: "string",
-            nullable: false 
+            nullable: false
         },
-        provider: { 
+        provider: {
             type: "string",
-            nullable: true 
+            nullable: true
         },
-        groups: { 
+        groups: {
             type: "array",
             nullable: true,
-            items: GroupsFastSchemaStructure 
+            items: GroupsFastSchemaStructure
         },
-        roles: { 
+        roles: {
             type: "array",
             nullable: true,
-            items: RolesFastSchemaStructure 
+            items: {
+                type: "string"
+            }
         },
-        root: { 
+        root: {
             type: "boolean",
             nullable: false,
-            default: false 
+            default: false
         },
-        blocked: { 
+        blocked: {
             type: "boolean",
             nullable: false,
-            default: false 
+            default: false
         },
-        validated: { 
+        validated: {
             type: "boolean",
             nullable: false,
-            default: false 
+            default: false
         },
-        verifyEmail: { 
+        verifyEmail: {
             type: "boolean",
             nullable: false,
-            default: false 
+            default: false
         },
-        verifyEmailCode: { 
+        verifyEmailCode: {
             type: "integer",
-            nullable: true 
+            nullable: true
         },
-        verifySMS: { 
+        verifySMS: {
             type: "boolean",
             nullable: false,
-            default: false 
+            default: false
         },
-        verifySMSCode: { 
+        verifySMSCode: {
             type: "integer",
-            nullable: true 
+            nullable: true
         },
-        optSecret: { 
+        optSecret: {
             type: "string",
-            nullable: true 
+            nullable: true
         },
-        optSecretVerify: { 
+        optSecretVerify: {
             type: "boolean",
             nullable: false,
-            default: false 
+            default: false
+        },
+        profile: {
+            type: "string",
+            nullable: true,
+            default: '{}'
         }
     },
     required: ["id", "username", "password", "root", "blocked", "validated", "verifyEmail", "verifySMS", "optSecretVerify"]

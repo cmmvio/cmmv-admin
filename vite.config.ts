@@ -4,7 +4,6 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
-    // Carrega as variáveis do ambiente com base no modo
     const env = loadEnv(mode, process.cwd(), 'VITE')
 
     return {

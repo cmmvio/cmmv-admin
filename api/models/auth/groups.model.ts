@@ -1,38 +1,30 @@
-/**                                                                               
+/**
     **********************************************
     This script was generated automatically by CMMV.
-    It is recommended not to modify this file manually, 
+    It is recommended not to modify this file manually,
     as it may be overwritten by the application.
     **********************************************
 **/
 
-import * as fastJson from "fast-json-stringify";
-import { ObjectId } from "mongodb";
+import { fastJson } from "@cmmv/core";
+import { ObjectId } from "@cmmv/repository";
 
-import { 
-    Expose, instanceToPlain, plainToInstance 
-} from "class-transformer";
+import {
+    Expose, instanceToPlain, plainToInstance
+} from "@cmmv/core";
 
-import { 
-    IsOptional, IsString, MinLength, MaxLength, IsNotEmpty 
-} from "class-validator"; 
-
-import { 
-    Roles, RolesFastSchemaStructure 
-} from "@models/auth/roles.model"; 
+import {
+    IsOptional, IsString, MinLength, MaxLength, IsNotEmpty
+} from "@cmmv/core"; 
 
 export interface IGroups {
     _id?: ObjectId;
     name: string;
-    roles?: object | string | string[] | ObjectId;
+    roles?: string[];
 }
 
 //Model
 export class Groups implements IGroups {
-    @Expose()
-    @IsOptional()
-    _id?: ObjectId;
-
     @Expose({ toClassOnly: true })
     @IsOptional()
     id: string;
@@ -45,7 +37,7 @@ export class Groups implements IGroups {
     name: string;
 
     @Expose()
-    roles?: Roles[] | string[] | ObjectId[] | null;
+    roles?: string[] = [];
 
     constructor(partial: Partial<Groups>) {
         Object.assign(this, partial);
@@ -63,7 +55,7 @@ export class Groups implements IGroups {
         })
     }
 
-    public static fromEntity(entity: any) : Groups {
+    public static fromEntity(entity: any) : any {
         return plainToInstance(this, entity, {
             exposeUnsetFields: false,
             enableImplicitConversion: true,
@@ -81,18 +73,20 @@ export const GroupsFastSchemaStructure = {
     title: "Groups Schema",
     type: "object",
     properties: {
-        id: { 
+        id: {
             type: "string",
-            nullable: false 
+            nullable: false
         },
-        name: { 
+        name: {
             type: "string",
-            nullable: false 
+            nullable: false
         },
-        roles: { 
+        roles: {
             type: "array",
             nullable: true,
-            items: RolesFastSchemaStructure 
+            items: {
+                type: "string"
+            }
         }
     },
     required: ["id", "name"]

@@ -1,24 +1,24 @@
-/**                                                                               
+/**
     **********************************************
     This script was generated automatically by CMMV.
-    It is recommended not to modify this file manually, 
+    It is recommended not to modify this file manually,
     as it may be overwritten by the application.
     **********************************************
 **/
 
-import * as fastJson from "fast-json-stringify";
-import { ObjectId } from "mongodb";
+import { fastJson } from "@cmmv/core";
+import { ObjectId } from "@cmmv/repository";
 
-import { 
-    Expose, instanceToPlain, plainToInstance 
-} from "class-transformer";
+import {
+    Expose, instanceToPlain, plainToInstance
+} from "@cmmv/core";
 
-import { 
-    IsOptional, IsNotEmpty 
-} from "class-validator"; 
+import {
+    IsOptional, IsNotEmpty
+} from "@cmmv/core"; 
 
-import { 
-    User, UserFastSchemaStructure 
+import {
+    User, UserFastSchemaStructure
 } from "@models/auth/user.model"; 
 
 export interface ISessions {
@@ -37,10 +37,6 @@ export interface ISessions {
 
 //Model
 export class Sessions implements ISessions {
-    @Expose()
-    @IsOptional()
-    _id?: ObjectId;
-
     @Expose({ toClassOnly: true })
     @IsOptional()
     id: string;
@@ -97,7 +93,7 @@ export class Sessions implements ISessions {
         })
     }
 
-    public static fromEntity(entity: any) : Sessions {
+    public static fromEntity(entity: any) : any {
         return plainToInstance(this, entity, {
             exposeUnsetFields: false,
             enableImplicitConversion: true,
@@ -115,50 +111,50 @@ export const SessionsFastSchemaStructure = {
     title: "Sessions Schema",
     type: "object",
     properties: {
-        id: { 
+        id: {
             type: "string",
-            nullable: false 
+            nullable: false
         },
-        uuid: { 
+        uuid: {
             type: "string",
-            nullable: false 
+            nullable: false
         },
-        fingerprint: { 
+        fingerprint: {
             type: "string",
-            nullable: false 
+            nullable: false
         },
-        user: { 
+        user: {
             type: "object",
-            nullable: false 
+            nullable: false
         },
-        ipAddress: { 
+        ipAddress: {
             type: "string",
-            nullable: false 
+            nullable: false
         },
-        device: { 
+        device: {
             type: "string",
-            nullable: true 
+            nullable: true
         },
-        browser: { 
+        browser: {
             type: "string",
-            nullable: true 
+            nullable: true
         },
-        os: { 
+        os: {
             type: "string",
-            nullable: true 
+            nullable: true
         },
-        revoked: { 
+        revoked: {
             type: "boolean",
             nullable: false,
-            default: false 
+            default: false
         },
-        userAgent: { 
+        userAgent: {
             type: "string",
-            nullable: true 
+            nullable: true
         },
-        refreshToken: { 
+        refreshToken: {
             type: "string",
-            nullable: false 
+            nullable: false
         }
     },
     required: ["id", "uuid", "fingerprint", "user", "ipAddress", "revoked", "refreshToken"]
