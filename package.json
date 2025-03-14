@@ -1,76 +1,32 @@
 {
-    "name": "@cmmv/admin",
+    "name": "cmmv-admin-monorepo",
     "version": "0.0.1",
     "private": true,
-    "type": "module",
+    "engines": {
+        "node": ">=20.15",
+        "pnpm": ">=10.2.1"
+    },
     "scripts": {
-        "dev": "vite",
-        "dev:api": "NODE_ENV=dev nodemon",
-        "build": "run-p type-check \"build-only {@}\" --",
-        "preview": "vite preview",
-        "test:unit": "vitest",
-        "build-only": "vite build",
-        "type-check": "vue-tsc --build",
-        "lint": "eslint . --fix",
-        "format": "prettier --write src/"
+        "dev": "turbo run dev --parallel",
+        "build": "turbo run build --parallel"
     },
-    "dependencies": {
-        "@cmmv/auth": "^0.8.26",
-        "@cmmv/core": "^0.8.26",
-        "@cmmv/http": "^0.8.26",
-        "@cmmv/repository": "^0.8.26",
-        "@cmmv/ui": "^0.0.12",
-        "@cmmv/view": "^0.8.26",
-        "@swc-node/core": "^1.13.3",
-        "@swc-node/register": "^1.10.9",
-        "@swc/core": "^1.10.18",
-        "@tailwindcss/vite": "^4.0.8",
-        "class-transformer": "^0.5.1",
-        "class-validator": "^0.14.1",
-        "dotenv": "^16.4.7",
-        "fast-json-stringify": "^6.0.1",
-        "firebase": "^11.3.1",
-        "mongodb": "^6.13.1",
-        "pinia": "^2.3.1",
-        "reflect-metadata": "^0.2.2",
-        "tailwindcss": "^4.0.8",
-        "typeorm": "^0.3.20",
-        "vue": "^3.5.13",
-        "vue-recaptcha": "3.0.0-alpha.6",
-        "vue-recaptcha-v3": "^2.0.1",
-        "vue-router": "^4.5.0"
-    },
+    "packageManager": "pnpm@10.2.1",
     "devDependencies": {
-        "@cmmv/cli": "^0.7.4",
         "@tsconfig/node22": "^22.0.0",
-        "@types/jsdom": "^21.1.7",
-        "@types/node": "^22.13.5",
-        "@vitejs/plugin-vue": "^5.2.1",
-        "@vitest/eslint-plugin": "1.1.25",
-        "@vue/eslint-config-prettier": "^10.2.0",
-        "@vue/eslint-config-typescript": "^14.4.0",
-        "@vue/test-utils": "^2.4.6",
+        "@types/node": "^22.13.10",
         "@vue/tsconfig": "^0.7.0",
-        "eslint": "^9.21.0",
-        "eslint-plugin-vue": "^9.32.0",
-        "jiti": "^2.4.2",
-        "jsdom": "^26.0.0",
-        "nodemon": "^3.1.9",
-        "npm-run-all2": "^7.0.2",
-        "prettier": "^3.5.2",
         "ts-node": "^10.9.2",
-        "typescript": "~5.7.3",
-        "vite": "^6.1.1",
-        "vite-plugin-vue-devtools": "^7.7.2",
-        "vitest": "^3.0.6",
-        "vue-tsc": "^2.2.4"
+        "turbo": "^2.4.4",
+        "typescript": "~5.7.3"
     },
     "pnpm": {
         "onlyBuiltDependencies": [
+            "@apollo/protobufjs",
             "@swc/core",
             "esbuild",
-            "skia-canvas",
-            "sqlite3"
+            "sqlite3",
+            "protobufjs",
+            "skia-canvas"
         ]
     }
 }
