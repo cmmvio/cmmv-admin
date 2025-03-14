@@ -31,6 +31,12 @@
         "lib": ["esnext", "dom"],
         "types": ["node"]
     },
-    "include": ["src/**/*.ts"],
+    "include": [
+        "src/**/*.ts",
+        "src/graphql.composable.ts",
+        "src/index.ts",
+        "src/rest.composable.ts",
+        "src/rpc.composable.ts"
+    ],
     "exclude": ["node_modules", "dist", "**/*.spec.ts"]
 }

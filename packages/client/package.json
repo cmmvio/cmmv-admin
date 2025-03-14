@@ -15,6 +15,7 @@
     },
     "scripts": {
         "postinstall": "pnpm approve-builds",
+        "dev": "chokidar 'src/**/*' -c 'pnpm build'",
         "build": "cmmv build",
         "release": "cmmv release",
         "lint": "cmmv lint",
@@ -46,6 +47,8 @@
         "@tsconfig/node22": "^22.0.0",
         "@types/node": "^22.13.10",
         "@vue/tsconfig": "^0.7.0",
+        "chokidar": "^4.0.3",
+        "chokidar-cli": "^3.0.0",
         "conventional-changelog": "^6.0.0",
         "conventional-changelog-cli": "^5.0.0",
         "husky": "^9.1.7",
