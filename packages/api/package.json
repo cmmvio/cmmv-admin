@@ -1,0 +1,45 @@
+{
+    "name": "@cmmv/api",
+    "version": "0.0.1",
+    "description": "",
+    "keywords": [],
+    "author": "",
+    "private": true,
+    "license": "MIT",
+    "scripts": {
+        "dev": "cmmv dev --watch --debug",
+        "build": "cmmv build",
+        "start": "cmmv start",
+        "lint": "cmmv lint",
+        "test": "vitest",
+        "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+    },
+    "dev": {
+        "ignore": [
+            ".generated",
+            "src/models",
+            "src/entities",
+            "public"
+        ]
+    },
+    "dependencies": {
+        "@cmmv/auth": "^0.8.33",
+        "@cmmv/core": "^0.8.33",
+        "@cmmv/http": "^0.8.33",
+        "@cmmv/repository": "^0.8.33",
+        "@loskir/styled-qr-code-node": "^1.5.2",
+        "sqlite3": "^5.1.7"
+    },
+    "devDependencies": {
+        "@cmmv/cli": "^0.7.4",
+        "@swc-node/register": "^1.10.9",
+        "@tsconfig/node22": "^22.0.0",
+        "@types/node": "^22.13.5",
+        "conventional-changelog": "^6.0.0",
+        "conventional-changelog-cli": "^5.0.0",
+        "esbuild": "^0.25.0",
+        "husky": "^9.1.7",
+        "lint-staged": "^15.4.3",
+        "vitest": "^3.0.6"
+    }
+}
