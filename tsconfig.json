@@ -1,14 +1,4 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    },
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.vitest.json"
-    }
-  ]
+    "extends": "@tsconfig/node22/tsconfig.json",
+    "exclude": ["**/dist/**/*", "**/node_modules/**/*"]
 }

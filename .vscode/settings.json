@@ -1,0 +1,11 @@
+{
+  "explorer.fileNesting.enabled": false,
+  "explorer.fileNesting.patterns": {
+
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
