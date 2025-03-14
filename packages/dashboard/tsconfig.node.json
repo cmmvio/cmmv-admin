@@ -6,14 +6,16 @@
         "cypress.config.*",
         "nightwatch.conf.*",
         "playwright.config.*",
-        "eslint.config.*"
-, "packages/dashboard/vitest.config.ts", "packages/dashboard/vite.config.ts"    ],
+        "eslint.config.*",
+        "vitest.config.ts",
+        "vite.config.ts"
+    ],
     "compilerOptions": {
         "noEmit": true,
         "incremental": true,
         "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
         "module": "ESNext",
-        "moduleResolution": "Bundler",
+        "moduleResolution": "node",
         "esModuleInterop": false,
         "sourceMap": true,
         "baseUrl": ".",

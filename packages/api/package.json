@@ -2,8 +2,12 @@
     "name": "@cmmv/api",
     "version": "0.0.1",
     "description": "",
-    "keywords": [],
-    "author": "",
+    "keywords": [
+        "cmmv",
+        "api",
+        "sample"
+    ],
+    "author": "Andre Ferreira",
     "private": true,
     "license": "MIT",
     "scripts": {
