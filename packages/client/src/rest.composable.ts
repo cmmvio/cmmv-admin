@@ -8,6 +8,13 @@ export function useApi() {
     const refreshToken = ref<string | null>(localStorage.getItem('refreshToken') || null)
     const isAuthenticated = computed(() => !!token.value)
 
+    const getHeaders = (headers?: object) => {
+        return {
+            Authorization: `Bearer ${token.value}`,
+            ...headers,
+        }
+    }
+
     const authRequest = async (path: string, method: string, payload?: any, headers?: object) => {
         try {
             if (token.value && token.value !== 'null') {
@@ -116,6 +123,7 @@ export function useApi() {
         user,
         token,
         isAuthenticated,
+        getHeaders,
         authRequest,
         checkSession,
         login,

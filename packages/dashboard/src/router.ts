@@ -1,12 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import AdminLayout from './layouts/AdminLayout.vue'
+import AuthenticationLayout from './layouts/AuthenticationLayout.vue'
 
 import HomeView from './views/HomeView.vue'
 import LoginView from './views/LoginView.vue'
 import AdminView from './views/AdminView.vue'
 import OptView from './views/OptView.vue'
 import OptActiveView from './views/OptActiveView.vue'
+import AuthGroupsView from "./views/auth/AuthGroupsView.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,7 +27,10 @@ const router = createRouter({
             path: '/admin',
             name: 'admin',
             component: AdminLayout,
-            children: [{ path: '', component: AdminView }],
+            children: [{
+                path: '',
+                component: AdminView
+            }],
         },
         {
             path: '/opt-validate',
@@ -37,6 +42,18 @@ const router = createRouter({
             name: 'opt-active',
             component: OptActiveView,
         },
+        {
+            path: "/authentication",
+            component: AdminLayout,
+            children: [{
+                path: '',
+                component: AuthenticationLayout,
+                children: [{
+                    path: '',
+                    component: AuthGroupsView
+                }]
+            }],
+        }
     ],
 })
 

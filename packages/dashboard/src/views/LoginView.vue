@@ -4,7 +4,11 @@
             <div
                 class="flex items-center justify-center h-screen w-full md:w-6/12 max-w-lg m-auto p-4 z-50 animate-fade-in"
             >
-                <c-card class="login-box bg-white dark:bg-zinc-800 p-8 relative">
+                <c-card bgColor="bg-white dark:bg-neutral-800" class="login-box p-8 relative">
+                    <div class="right-2 top-2 absolute">
+                        <SwitchTheme />
+                    </div>
+
                     <div
                         class="absolute w-full h-full top-0 left-0 right-0 bottom-0 bg-black opacity-60 flex items-center justify-center"
                         style="z-index: 9999"
@@ -245,6 +249,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useReCaptcha } from 'vue-recaptcha-v3'
 import { useApi } from '@cmmv/client'
+import SwitchTheme from '../components/SwitchTheme.vue'
 import IconCheck from '@cmmv/ui'
 
 const api = useApi()
